@@ -1,0 +1,45 @@
+{
+  "name": "message-tester",
+  "version": "1.0.0",
+  "description": "A simple demo app for testing the new messages interface.",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "run-p type-check \"build-web {@}\" \"build-plugin {@}\" --",
+    "build-plugin": "vite build --mode lib",
+    "build-web": "vite build",
+    "preview": "vite preview",
+    "preview-web": "vite preview --outDir web-dist",
+    "type-check": "vue-tsc --build --force",
+    "type-check:watch": "vue-tsc --build --force --watch",
+    "format": "prettier --write \"src/**/*.{vue,ts,js}\"",
+    "format:check": "prettier --check \"src/**/*.{vue,ts,js}\""
+  },
+  "dependencies": {
+    "@trymimirai/app-sdk": "file:../../app-sdk",
+    "@trymimirai/app-types": "file:../../app-types",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/tsconfig": "^0.5.1",
+    "autoprefixer": "^10.4.20",
+    "npm-run-all2": "^7.0.2",
+    "postcss": "^8.5.0",
+    "prettier": "^3.4.2",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.6.3",
+    "vite": "^6.0.3",
+    "vite-plugin-vue-devtools": "^7.6.4",
+    "vue-tsc": "^2.1.10"
+  },
+  "author": "Justin Garofolo",
+  "keywords": [
+    "mimir-ai",
+    "vue",
+    "typescript",
+    "app"
+  ]
+}

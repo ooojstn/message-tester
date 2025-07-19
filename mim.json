@@ -1,0 +1,18 @@
+{
+  "id": "message-tester",
+  "name": "Message Tester",
+  "version": "1.0.0",
+  "description": "A simple demo app for testing the new messages interface.",
+  "author": "Justin Garofolo",
+  "entryPoint": "dist/index.js",
+  "permissions": [
+    "ui.windows",
+    "ui.notifications",
+    "ui.theme",
+    "messaging"
+  ],
+  "engines": {
+    "mimir": ">=1.0.0"
+  },
+  "icon": "https://f002.backblazeb2.com/file/mimir-public/icons/testing.png"
+}
