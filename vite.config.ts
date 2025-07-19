@@ -32,7 +32,7 @@ export default defineConfig(({ command, mode }) => {
           formats: ["es"]
         },
         rollupOptions: {
-          external: [],
+          external: ['@trymimirai/app-sdk', '@trymimirai/app-types'],
           output: {
             entryFileNames: 'index.js',
             format: 'es'
