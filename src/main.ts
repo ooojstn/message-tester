@@ -48,7 +48,7 @@ class MessageTesterApp extends BaseApp {
 
             const testWindow = await this.api.ui.windows.create({
                 id: "message-tester-window",
-                title: "📡 Message Tester",
+                title: "Message Tester",
                 width: 900,
                 height: 700,
                 x: 200,
@@ -179,7 +179,7 @@ class MessageTesterApp extends BaseApp {
             type: "pong",
             originalPing: message,
             timestamp: new Date().toISOString(),
-            appId: this.api.getPluginId(),
+            appId: this.api.getAppId(),
             responseTime: Date.now(),
         };
 
@@ -201,7 +201,7 @@ class MessageTesterApp extends BaseApp {
             message: `Hello from app instance! Received: ${message.content}`,
             timestamp: new Date().toISOString(),
             appInfo: {
-                id: this.api.getPluginId(),
+                id: this.api.getAppId(),
                 version: "1.0.0",
                 name: "Message Tester",
             },
@@ -220,7 +220,7 @@ class MessageTesterApp extends BaseApp {
             await this.sendResponseMessage({
                 type: "app-info-response",
                 data: {
-                    appId: this.api.getPluginId(),
+                    appId: this.api.getAppId(),
                     windowId: this._testWindow?.id || "unknown",
                     timestamp: new Date().toISOString(),
                     uptime: process.uptime(),
@@ -281,7 +281,7 @@ class MessageTesterApp extends BaseApp {
             type: "connection-acknowledged",
             message: "App instance is ready for messaging tests!",
             timestamp: new Date().toISOString(),
-            appId: this.api.getPluginId(),
+            appId: this.api.getAppId(),
             capabilities: ["ping-pong", "data-requests", "custom-messages", "stress-testing"],
         });
     }
@@ -323,7 +323,7 @@ class MessageTesterApp extends BaseApp {
         console.log("[MessageTesterApp] Handling test channel message:", message, "from:", source);
 
         // Only respond to ping messages from OTHER sources (not from this app itself)
-        if (message.type === "ping" && source !== this.api.getPluginId()) {
+        if (message.type === "ping" && source !== this.api.getAppId()) {
             console.log("[MessageTesterApp] Received ping from external source, sending pong");
 
             // Respond with pong on test channel
@@ -331,14 +331,14 @@ class MessageTesterApp extends BaseApp {
                 type: "pong",
                 originalPing: message,
                 timestamp: new Date().toISOString(),
-                appId: this.api.getPluginId(),
+                appId: this.api.getAppId(),
                 responseTime: Date.now(),
                 source: "app",
             };
 
             await this.api.messaging.sendToChannel("test", pongMessage);
             console.log("[MessageTesterApp] Sent pong response to test channel");
-        } else if (message.type === "ping" && source === this.api.getPluginId()) {
+        } else if (message.type === "ping" && source === this.api.getAppId()) {
             console.log("[MessageTesterApp] Ignoring ping from self to avoid loop");
         }
     }

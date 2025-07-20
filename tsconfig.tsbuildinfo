@@ -1,1 +1,1 @@
-{"root":["./env.d.ts","./src/App.vue","./src/main.ts","./src/components/MessagingTest.vue","./src/components/TabSystem.vue","./src/types/webview.d.ts","./vite.config.ts"],"version":"5.8.3"}
+{"root":["./env.d.ts","./src/App.vue","./src/main.ts","./src/components/MessagingTest.vue","./src/components/TabSystem.vue","./src/types/app.d.ts","./vite.config.ts"],"version":"5.8.3"}

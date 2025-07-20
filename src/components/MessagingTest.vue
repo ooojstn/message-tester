@@ -264,34 +264,34 @@ const messagesReceived = ref<number>(0);
 const messageList = ref<HTMLElement | null>(null);
 const stressTestRunning = ref<boolean>(false);
 
-// Plugin API reference with proper typing
-let pluginAPI: MimirAPI | null = null;
+// App API reference with proper typing
+let appAPI: MimirAPI | null = null;
 let messageCleanup: MessageCleanup | null = null;
 let pingStartTime: number = 0;
 
-// Initialize plugin API connection
-const initializePluginAPI = async (): Promise<void> => {
+// Initialize app API connection
+const initializeAppAPI = async (): Promise<void> => {
     try {
-        // Check if plugin API is available
-        if (typeof window !== "undefined" && window.pluginAPI) {
-            pluginAPI = window.pluginAPI;
+        // Check if app API is available
+        if (typeof window !== "undefined" && window.appAPI) {
+            appAPI = window.appAPI;
             apiStatus.value = "available";
 
-            // Wait for plugin ID to be available (with timeout)
+            // Wait for app ID to be available (with timeout)
             let attempts = 0;
             const maxAttempts = 50; // 5 seconds total
-            while ((!pluginAPI.getPluginId() || pluginAPI.getPluginId() === "") && attempts < maxAttempts) {
+            while ((!appAPI.getAppId() || appAPI.getAppId() === "") && attempts < maxAttempts) {
                 await new Promise(resolve => setTimeout(resolve, 100));
                 attempts++;
             }
 
-            const pluginId = pluginAPI.getPluginId();
-            console.log(`[MessagingTest] Plugin ID initialized: '${pluginId}' (attempts: ${attempts})`);
+            const appId = appAPI.getAppId();
+            console.log(`[MessagingTest] App ID initialized: '${appId}' (attempts: ${attempts})`);
 
             // Set up message listener
-            if (pluginAPI.messaging) {
-                // Listen for direct plugin messages
-                const directMessageCleanup = pluginAPI.messaging.onMessage((message: any) => {
+            if (appAPI.messaging) {
+                // Listen for direct app messages
+                const directMessageCleanup = appAPI.messaging.onMessage((message: any) => {
                     handleReceivedMessage(message);
                 });
 
@@ -301,7 +301,7 @@ const initializePluginAPI = async (): Promise<void> => {
                     handleReceivedMessage(message);
                 };
 
-                const channelCleanup = pluginAPI.messaging.subscribeToChannel("test", channelMessageHandler);
+                const channelCleanup = appAPI.messaging.subscribeToChannel("test", channelMessageHandler);
 
                 // Combine cleanup functions
                 messageCleanup = () => {
@@ -318,18 +318,18 @@ const initializePluginAPI = async (): Promise<void> => {
                     webviewId: "message-tester-webview",
                 });
 
-                console.log("[MessagingTest] Plugin API initialized and connected");
+                console.log("[MessagingTest] App API initialized and connected");
             } else {
-                console.warn("[MessagingTest] Plugin API found but messaging not available");
+                console.warn("[MessagingTest] App API found but messaging not available");
                 connectionStatus.value = "disconnected";
             }
         } else {
-            console.warn("[MessagingTest] Plugin API not available");
+            console.warn("[MessagingTest] App API not available");
             apiStatus.value = "unavailable";
             connectionStatus.value = "disconnected";
         }
     } catch (error) {
-        console.error("[MessagingTest] Failed to initialize plugin API:", error);
+        console.error("[MessagingTest] Failed to initialize app API:", error);
         apiStatus.value = "unavailable";
         connectionStatus.value = "disconnected";
     }
@@ -367,10 +367,10 @@ const handleReceivedMessage = (message: any): void => {
     });
 };
 
-// Send message via plugin API
+// Send message via app API
 const sendMessage = async (message: any): Promise<void> => {
-    if (!pluginAPI || !pluginAPI.messaging) {
-        console.error("[MessagingTest] Plugin API not available for sending");
+    if (!appAPI || !appAPI.messaging) {
+        console.error("[MessagingTest] App API not available for sending");
         return;
     }
 
@@ -382,8 +382,8 @@ const sendMessage = async (message: any): Promise<void> => {
             pingStartTime = Date.now();
         }
 
-        // await pluginAPI.messaging.postMessage(message);
-        await pluginAPI.messaging.sendToChannel("test", message);
+        // await appAPI.messaging.postMessage(message);
+        await appAPI.messaging.sendToChannel("test", message);
 
         messagesSent.value++;
         messageHistory.value.push({
@@ -514,7 +514,7 @@ const handleTabChange = (tabId: string): void => {
 // Lifecycle hooks
 onMounted(() => {
     console.log("[MessagingTest] Component mounted, initializing...");
-    initializePluginAPI();
+    initializeAppAPI();
 });
 
 onUnmounted(() => {

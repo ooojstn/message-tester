@@ -18,7 +18,7 @@ const B = process.env.NODE_ENV !== "production" ? Object.freeze({}) : {}, Dt = p
 (e.charCodeAt(2) > 122 || e.charCodeAt(2) < 97), vn = (e) => e.startsWith("onUpdate:"), ee = Object.assign, bs = (e, t) => {
   const n = e.indexOf(t);
   n > -1 && e.splice(n, 1);
-}, zr = Object.prototype.hasOwnProperty, k = (e, t) => zr.call(e, t), M = Array.isArray, dt = (e) => Tn(e) === "[object Map]", Vo = (e) => Tn(e) === "[object Set]", A = (e) => typeof e == "function", X = (e) => typeof e == "string", lt = (e) => typeof e == "symbol", G = (e) => e !== null && typeof e == "object", ys = (e) => (G(e) || A(e)) && A(e.then) && A(e.catch), Co = Object.prototype.toString, Tn = (e) => Co.call(e), Es = (e) => Tn(e).slice(8, -1), Mo = (e) => Tn(e) === "[object Object]", Ns = (e) => X(e) && e !== "NaN" && e[0] !== "-" && "" + parseInt(e, 10) === e, Lt = /* @__PURE__ */ Ze(
+}, zr = Object.prototype.hasOwnProperty, k = (e, t) => zr.call(e, t), M = Array.isArray, pt = (e) => Tn(e) === "[object Map]", Vo = (e) => Tn(e) === "[object Set]", A = (e) => typeof e == "function", X = (e) => typeof e == "string", lt = (e) => typeof e == "symbol", G = (e) => e !== null && typeof e == "object", ys = (e) => (G(e) || A(e)) && A(e.then) && A(e.catch), Co = Object.prototype.toString, Tn = (e) => Co.call(e), Es = (e) => Tn(e).slice(8, -1), Mo = (e) => Tn(e) === "[object Object]", Ns = (e) => X(e) && e !== "NaN" && e[0] !== "-" && "" + parseInt(e, 10) === e, Lt = /* @__PURE__ */ Ze(
   // the leading comma is intentional so empty string "" is also included
   ",key,ref,ref_for,ref_key,onVnodeBeforeMount,onVnodeMounted,onVnodeBeforeUpdate,onVnodeUpdated,onVnodeBeforeUnmount,onVnodeUnmounted"
 ), Jr = /* @__PURE__ */ Ze(
@@ -89,7 +89,7 @@ const ni = "html,body,base,head,link,meta,style,title,address,article,aside,foot
 function Ao(e) {
   return !!e || e === "";
 }
-const Io = (e) => !!(e && e.__v_isRef === !0), ue = (e) => X(e) ? e : e == null ? "" : M(e) || G(e) && (e.toString === Co || !A(e.toString)) ? Io(e) ? ue(e.value) : JSON.stringify(e, $o, 2) : String(e), $o = (e, t) => Io(t) ? $o(e, t.value) : dt(t) ? {
+const Io = (e) => !!(e && e.__v_isRef === !0), ue = (e) => X(e) ? e : e == null ? "" : M(e) || G(e) && (e.toString === Co || !A(e.toString)) ? Io(e) ? ue(e.value) : JSON.stringify(e, $o, 2) : String(e), $o = (e, t) => Io(t) ? $o(e, t.value) : pt(t) ? {
   [`Map(${t.size})`]: [...t.entries()].reduce(
     (n, [s, o], r) => (n[Wn(s, r) + " =>"] = o, n),
     {}
@@ -292,7 +292,7 @@ function Ho(e) {
   let t, n = e.depsTail, s = n;
   for (; s; ) {
     const o = s.prevDep;
-    s.version === -1 ? (s === n && (n = o), Ds(s), di(s)) : t = s, s.dep.activeLink = s.prevActiveLink, s.prevActiveLink = void 0, s = o;
+    s.version === -1 ? (s === n && (n = o), Ds(s), pi(s)) : t = s, s.dep.activeLink = s.prevActiveLink, s.prevActiveLink = void 0, s = o;
   }
   e.deps = t, e.depsTail = n;
 }
@@ -327,7 +327,7 @@ function Ds(e, t = !1) {
   }
   !t && !--n.sc && n.map && n.map.delete(n.key);
 }
-function di(e) {
+function pi(e) {
   const { prevDep: t, nextDep: n } = e;
   t && (t.nextDep = n, e.prevDep = void 0), n && (n.prevDep = t, e.nextDep = void 0);
 }
@@ -353,7 +353,7 @@ function qs(e) {
   }
 }
 let zt = 0;
-class pi {
+class di {
   constructor(t, n) {
     this.sub = t, this.dep = n, this.version = n.version, this.nextDep = this.prevDep = this.nextSub = this.prevSub = this.prevActiveLink = void 0;
   }
@@ -368,7 +368,7 @@ class Ss {
       return;
     let n = this.activeLink;
     if (n === void 0 || n.sub !== W)
-      n = this.activeLink = new pi(W, this), W.deps ? (n.prevDep = W.depsTail, W.depsTail.nextDep = n, W.depsTail = n) : W.deps = W.depsTail = n, Uo(n);
+      n = this.activeLink = new di(W, this), W.deps ? (n.prevDep = W.depsTail, W.depsTail.nextDep = n, W.depsTail = n) : W.deps = W.depsTail = n, Uo(n);
     else if (n.version === -1 && (n.version = this.version, n.nextDep)) {
       const s = n.nextDep;
       s.prevDep = n.prevDep, n.prevDep && (n.prevDep.nextDep = s), n.prevDep = W.depsTail, n.nextDep = void 0, W.depsTail.nextDep = n, W.depsTail = n, W.deps === n && (W.deps = s);
@@ -417,7 +417,7 @@ function Uo(e) {
     n !== e && (e.prevSub = n, n && (n.nextSub = e)), process.env.NODE_ENV !== "production" && e.dep.subsHead === void 0 && (e.dep.subsHead = e), e.dep.subs = e;
   }
 }
-const rs = /* @__PURE__ */ new WeakMap(), pt = Symbol(
+const rs = /* @__PURE__ */ new WeakMap(), dt = Symbol(
   process.env.NODE_ENV !== "production" ? "Object iterate" : ""
 ), is = Symbol(
   process.env.NODE_ENV !== "production" ? "Map keys iterate" : ""
@@ -455,22 +455,22 @@ function Le(e, t, n, s, o, r) {
   if (ws(), t === "clear")
     i.forEach(l);
   else {
-    const a = M(e), p = a && Ns(n);
+    const a = M(e), d = a && Ns(n);
     if (a && n === "length") {
-      const d = Number(s);
+      const p = Number(s);
       i.forEach((f, g) => {
-        (g === "length" || g === Jt || !lt(g) && g >= d) && l(f);
+        (g === "length" || g === Jt || !lt(g) && g >= p) && l(f);
       });
     } else
-      switch ((n !== void 0 || i.has(void 0)) && l(i.get(n)), p && l(i.get(Jt)), t) {
+      switch ((n !== void 0 || i.has(void 0)) && l(i.get(n)), d && l(i.get(Jt)), t) {
         case "add":
-          a ? p && l(i.get("length")) : (l(i.get(pt)), dt(e) && l(i.get(is)));
+          a ? d && l(i.get("length")) : (l(i.get(dt)), pt(e) && l(i.get(is)));
           break;
         case "delete":
-          a || (l(i.get(pt)), dt(e) && l(i.get(is)));
+          a || (l(i.get(dt)), pt(e) && l(i.get(is)));
           break;
         case "set":
-          dt(e) && l(i.get(pt));
+          pt(e) && l(i.get(dt));
           break;
       }
   }
@@ -586,14 +586,14 @@ function qe(e, t, n, s, o, r) {
     const f = a.apply(e, r);
     return l ? le(f) : f;
   }
-  let p = n;
-  i !== e && (l ? p = function(f, g) {
+  let d = n;
+  i !== e && (l ? d = function(f, g) {
     return n.call(this, le(f), g, e);
-  } : n.length > 2 && (p = function(f, g) {
+  } : n.length > 2 && (d = function(f, g) {
     return n.call(this, f, g, e);
   }));
-  const d = a.call(i, p, s);
-  return l && o ? o(d) : d;
+  const p = a.call(i, d, s);
+  return l && o ? o(p) : p;
 }
 function Gs(e, t, n, s) {
   const o = Mn(e);
@@ -690,7 +690,7 @@ class Bo extends Wo {
     return ne(
       t,
       "iterate",
-      M(t) ? "length" : pt
+      M(t) ? "length" : dt
     ), Reflect.ownKeys(t);
   }
 }
@@ -714,17 +714,17 @@ class qo extends Wo {
 const _i = /* @__PURE__ */ new Bo(), bi = /* @__PURE__ */ new qo(), yi = /* @__PURE__ */ new Bo(!0), Ei = /* @__PURE__ */ new qo(!0), ls = (e) => e, ln = (e) => Reflect.getPrototypeOf(e);
 function Ni(e, t, n) {
   return function(...s) {
-    const o = this.__v_raw, r = F(o), i = dt(r), l = e === "entries" || e === Symbol.iterator && i, a = e === "keys" && i, p = o[e](...s), d = n ? ls : t ? bn : le;
+    const o = this.__v_raw, r = F(o), i = pt(r), l = e === "entries" || e === Symbol.iterator && i, a = e === "keys" && i, d = o[e](...s), p = n ? ls : t ? bn : le;
     return !t && ne(
       r,
       "iterate",
-      a ? is : pt
+      a ? is : dt
     ), {
       // iterator protocol
       next() {
-        const { value: f, done: g } = p.next();
+        const { value: f, done: g } = d.next();
         return g ? { value: f, done: g } : {
-          value: l ? [d(f[0]), d(f[1])] : d(f),
+          value: l ? [p(f[0]), p(f[1])] : p(f),
           done: g
         };
       },
@@ -752,24 +752,24 @@ function xi(e, t) {
     get(o) {
       const r = this.__v_raw, i = F(r), l = F(o);
       e || (rt(o, l) && ne(i, "get", o), ne(i, "get", l));
-      const { has: a } = ln(i), p = t ? ls : e ? bn : le;
+      const { has: a } = ln(i), d = t ? ls : e ? bn : le;
       if (a.call(i, o))
-        return p(r.get(o));
+        return d(r.get(o));
       if (a.call(i, l))
-        return p(r.get(l));
+        return d(r.get(l));
       r !== i && r.get(o);
     },
     get size() {
       const o = this.__v_raw;
-      return !e && ne(F(o), "iterate", pt), Reflect.get(o, "size", o);
+      return !e && ne(F(o), "iterate", dt), Reflect.get(o, "size", o);
     },
     has(o) {
       const r = this.__v_raw, i = F(r), l = F(o);
       return e || (rt(o, l) && ne(i, "has", o), ne(i, "has", l)), o === l ? r.has(o) : r.has(o) || r.has(l);
     },
     forEach(o, r) {
-      const i = this, l = i.__v_raw, a = F(l), p = t ? ls : e ? bn : le;
-      return !e && ne(a, "iterate", pt), l.forEach((d, f) => o.call(r, p(d), p(f), i));
+      const i = this, l = i.__v_raw, a = F(l), d = t ? ls : e ? bn : le;
+      return !e && ne(a, "iterate", dt), l.forEach((p, f) => o.call(r, d(p), d(f), i));
     }
   };
   return ee(
@@ -788,20 +788,20 @@ function xi(e, t) {
       set(o, r) {
         !t && !ge(r) && !We(r) && (r = F(r));
         const i = F(this), { has: l, get: a } = ln(i);
-        let p = l.call(i, o);
-        p ? process.env.NODE_ENV !== "production" && zs(i, l, o) : (o = F(o), p = l.call(i, o));
-        const d = a.call(i, o);
-        return i.set(o, r), p ? rt(r, d) && Le(i, "set", o, r, d) : Le(i, "add", o, r), this;
+        let d = l.call(i, o);
+        d ? process.env.NODE_ENV !== "production" && zs(i, l, o) : (o = F(o), d = l.call(i, o));
+        const p = a.call(i, o);
+        return i.set(o, r), d ? rt(r, p) && Le(i, "set", o, r, p) : Le(i, "add", o, r), this;
       },
       delete(o) {
         const r = F(this), { has: i, get: l } = ln(r);
         let a = i.call(r, o);
         a ? process.env.NODE_ENV !== "production" && zs(r, i, o) : (o = F(o), a = i.call(r, o));
-        const p = l ? l.call(r, o) : void 0, d = r.delete(o);
-        return a && Le(r, "delete", o, void 0, p), d;
+        const d = l ? l.call(r, o) : void 0, p = r.delete(o);
+        return a && Le(r, "delete", o, void 0, d), p;
       },
       clear() {
-        const o = F(this), r = o.size !== 0, i = process.env.NODE_ENV !== "production" ? dt(o) ? new Map(o) : new Set(o) : void 0, l = o.clear();
+        const o = F(this), r = o.size !== 0, i = process.env.NODE_ENV !== "production" ? pt(o) ? new Map(o) : new Set(o) : void 0, l = o.clear();
         return r && Le(
           o,
           "clear",
@@ -1027,22 +1027,22 @@ function ji(e, t = !1, n = ft) {
   );
 }
 function Hi(e, t, n = B) {
-  const { immediate: s, deep: o, once: r, scheduler: i, augmentJob: l, call: a } = n, p = (V) => {
+  const { immediate: s, deep: o, once: r, scheduler: i, augmentJob: l, call: a } = n, d = (V) => {
     (n.onWarn || Ke)(
       "Invalid watch source: ",
       V,
       "A watch source can only be a getter/effect function, a ref, a reactive object, or an array of these types."
     );
-  }, d = (V) => o ? V : ge(V) || o === !1 || o === 0 ? Je(V, 1) : Je(V);
+  }, p = (V) => o ? V : ge(V) || o === !1 || o === 0 ? Je(V, 1) : Je(V);
   let f, g, x, S, I = !1, te = !1;
-  if (Q(e) ? (g = () => e.value, I = ge(e)) : ht(e) ? (g = () => d(e), I = !0) : M(e) ? (te = !0, I = e.some((V) => ht(V) || ge(V)), g = () => e.map((V) => {
+  if (Q(e) ? (g = () => e.value, I = ge(e)) : ht(e) ? (g = () => p(e), I = !0) : M(e) ? (te = !0, I = e.some((V) => ht(V) || ge(V)), g = () => e.map((V) => {
     if (Q(V))
       return V.value;
     if (ht(V))
-      return d(V);
+      return p(V);
     if (A(V))
       return a ? a(V, 2) : V();
-    process.env.NODE_ENV !== "production" && p(V);
+    process.env.NODE_ENV !== "production" && d(V);
   })) : A(e) ? t ? g = a ? () => a(e, 2) : e : g = () => {
     if (x) {
       Ae();
@@ -1059,7 +1059,7 @@ function Hi(e, t, n = B) {
     } finally {
       ft = V;
     }
-  } : (g = se, process.env.NODE_ENV !== "production" && p(e)), t && o) {
+  } : (g = se, process.env.NODE_ENV !== "production" && d(e)), t && o) {
     const V = g, Z = o === !0 ? 1 / 0 : o;
     g = () => Je(V(), Z);
   }
@@ -1118,7 +1118,7 @@ function Je(e, t = 1 / 0, n) {
   else if (M(e))
     for (let s = 0; s < e.length; s++)
       Je(e[s], t, n);
-  else if (Vo(e) || dt(e))
+  else if (Vo(e) || pt(e))
     e.forEach((s) => {
       Je(s, t, n);
     });
@@ -1273,12 +1273,12 @@ function tn(e, t, n, s = !0) {
   const o = t ? t.vnode : null, { errorHandler: r, throwUnhandledErrorInProduction: i } = t && t.appContext.config || B;
   if (t) {
     let l = t.parent;
-    const a = t.proxy, p = process.env.NODE_ENV !== "production" ? Vs[n] : `https://vuejs.org/error-reference/#runtime-${n}`;
+    const a = t.proxy, d = process.env.NODE_ENV !== "production" ? Vs[n] : `https://vuejs.org/error-reference/#runtime-${n}`;
     for (; l; ) {
-      const d = l.ec;
-      if (d) {
-        for (let f = 0; f < d.length; f++)
-          if (d[f](e, a, p) === !1)
+      const p = l.ec;
+      if (p) {
+        for (let f = 0; f < p.length; f++)
+          if (p[f](e, a, d) === !1)
             return;
       }
       l = l.parent;
@@ -1287,7 +1287,7 @@ function tn(e, t, n, s = !0) {
       Ae(), Vt(r, null, 10, [
         e,
         a,
-        p
+        d
       ]), Ie();
       return;
     }
@@ -1402,7 +1402,7 @@ function Cs(e, t) {
   return e.set(t, n + 1), !1;
 }
 let Ue = !1;
-const dn = /* @__PURE__ */ new Map();
+const pn = /* @__PURE__ */ new Map();
 process.env.NODE_ENV !== "production" && (en().__VUE_HMR_RUNTIME__ = {
   createRecord: Jn(rr),
   rerender: Jn(Ji),
@@ -1439,15 +1439,15 @@ function Yi(e, t) {
   const s = [...n.instances];
   for (let o = 0; o < s.length; o++) {
     const r = s[o], i = Nn(r.type);
-    let l = dn.get(i);
-    l || (i !== n.initialDef && Ys(i, t), dn.set(i, l = /* @__PURE__ */ new Set())), l.add(r), r.appContext.propsCache.delete(r.type), r.appContext.emitsCache.delete(r.type), r.appContext.optionsCache.delete(r.type), r.ceReload ? (l.add(r), r.ceReload(t.styles), l.delete(r)) : r.parent ? $n(() => {
+    let l = pn.get(i);
+    l || (i !== n.initialDef && Ys(i, t), pn.set(i, l = /* @__PURE__ */ new Set())), l.add(r), r.appContext.propsCache.delete(r.type), r.appContext.emitsCache.delete(r.type), r.appContext.optionsCache.delete(r.type), r.ceReload ? (l.add(r), r.ceReload(t.styles), l.delete(r)) : r.parent ? $n(() => {
       Ue = !0, r.parent.update(), Ue = !1, l.delete(r);
     }) : r.appContext.reload ? r.appContext.reload() : typeof window < "u" ? window.location.reload() : console.warn(
       "[HMR] Root or manually mounted instance modified. Full reload required."
     ), r.root.ce && r !== r.root && r.root.ce._removeChildStyle(i);
   }
   nr(() => {
-    dn.clear();
+    pn.clear();
   });
 }
 function Ys(e, t) {
@@ -1638,19 +1638,19 @@ function Kt(e, t, n, s, o = !1) {
     );
     return;
   }
-  const p = t && t.r, d = l.refs === B ? l.refs = {} : l.refs, f = l.setupState, g = F(f), x = f === B ? () => !1 : (S) => process.env.NODE_ENV !== "production" && (k(g, S) && !Q(g[S]) && N(
+  const d = t && t.r, p = l.refs === B ? l.refs = {} : l.refs, f = l.setupState, g = F(f), x = f === B ? () => !1 : (S) => process.env.NODE_ENV !== "production" && (k(g, S) && !Q(g[S]) && N(
     `Template ref "${S}" used on a non-ref value. It will not work in the production build.`
   ), al.has(g[S])) ? !1 : k(g, S);
-  if (p != null && p !== a && (X(p) ? (d[p] = null, x(p) && (f[p] = null)) : Q(p) && (p.value = null)), A(a))
-    Vt(a, l, 12, [i, d]);
+  if (d != null && d !== a && (X(d) ? (p[d] = null, x(d) && (f[d] = null)) : Q(d) && (d.value = null)), A(a))
+    Vt(a, l, 12, [i, p]);
   else {
     const S = X(a), I = Q(a);
     if (S || I) {
       const te = () => {
         if (e.f) {
-          const K = S ? x(a) ? f[a] : d[a] : a.value;
-          o ? M(K) && bs(K, r) : M(K) ? K.includes(r) || K.push(r) : S ? (d[a] = [r], x(a) && (f[a] = d[a])) : (a.value = [r], e.k && (d[e.k] = a.value));
-        } else S ? (d[a] = i, x(a) && (f[a] = i)) : I ? (a.value = i, e.k && (d[e.k] = i)) : process.env.NODE_ENV !== "production" && N("Invalid template ref type:", a, `(${typeof a})`);
+          const K = S ? x(a) ? f[a] : p[a] : a.value;
+          o ? M(K) && bs(K, r) : M(K) ? K.includes(r) || K.push(r) : S ? (p[a] = [r], x(a) && (f[a] = p[a])) : (a.value = [r], e.k && (p[e.k] = a.value));
+        } else S ? (p[a] = i, x(a) && (f[a] = i)) : I ? (a.value = i, e.k && (p[e.k] = i)) : process.env.NODE_ENV !== "production" && N("Invalid template ref type:", a, `(${typeof a})`);
       };
       i ? (te.id = -1, Ee(te, n)) : te();
     } else process.env.NODE_ENV !== "production" && N("Invalid template ref type:", a, `(${typeof a})`);
@@ -1678,10 +1678,10 @@ function fr(e, t, n = ie) {
   if (Pn(t, s, n), n) {
     let o = n.parent;
     for (; o && o.parent; )
-      Ps(o.parent.vnode) && dl(s, t, n, o), o = o.parent;
+      Ps(o.parent.vnode) && pl(s, t, n, o), o = o.parent;
   }
 }
-function dl(e, t, n, s) {
+function pl(e, t, n, s) {
   const o = Pn(
     t,
     e,
@@ -1710,7 +1710,7 @@ function Pn(e, t, n = ie, s = !1) {
 }
 const Qe = (e) => (t, n = ie) => {
   (!Zt || e === "sp") && Pn(e, (...s) => t(...s), n);
-}, pl = Qe("bm"), dr = Qe("m"), hl = Qe(
+}, dl = Qe("bm"), pr = Qe("m"), hl = Qe(
   "bu"
 ), gl = Qe("u"), ml = Qe(
   "bum"
@@ -1721,17 +1721,17 @@ function yl(e, t = ie) {
   Pn("ec", e, t);
 }
 const El = Symbol.for("v-ndc");
-function pr(e, t, n, s) {
+function dr(e, t, n, s) {
   let o;
   const r = n, i = M(e);
   if (i || X(e)) {
     const l = i && ht(e);
-    let a = !1, p = !1;
-    l && (a = !ge(e), p = We(e), e = Mn(e)), o = new Array(e.length);
-    for (let d = 0, f = e.length; d < f; d++)
-      o[d] = t(
-        a ? p ? bn(le(e[d])) : le(e[d]) : e[d],
-        d,
+    let a = !1, d = !1;
+    l && (a = !ge(e), d = We(e), e = Mn(e)), o = new Array(e.length);
+    for (let p = 0, f = e.length; p < f; p++)
+      o[p] = t(
+        a ? d ? bn(le(e[p])) : le(e[p]) : e[p],
+        p,
         void 0,
         r
       );
@@ -1748,9 +1748,9 @@ function pr(e, t, n, s) {
     else {
       const l = Object.keys(e);
       o = new Array(l.length);
-      for (let a = 0, p = l.length; a < p; a++) {
-        const d = l[a];
-        o[a] = t(e[d], d, a, r);
+      for (let a = 0, d = l.length; a < d; a++) {
+        const p = l[a];
+        o[a] = t(e[p], p, a, r);
       }
     }
   else
@@ -1786,7 +1786,7 @@ const us = (e) => e ? Fr(e) ? jn(e) : us(e.parent) : null, mt = (
     const { ctx: n, setupState: s, data: o, props: r, accessCache: i, type: l, appContext: a } = e;
     if (process.env.NODE_ENV !== "production" && t === "__isVue")
       return !0;
-    let p;
+    let d;
     if (t[0] !== "$") {
       const x = i[t];
       if (x !== void 0)
@@ -1808,7 +1808,7 @@ const us = (e) => e ? Fr(e) ? jn(e) : us(e.parent) : null, mt = (
         if (
           // only cache other properties when instance has declared (thus stable)
           // props
-          (p = e.propsOptions[0]) && k(p, t)
+          (d = e.propsOptions[0]) && k(d, t)
         )
           return i[t] = 3, r[t];
         if (n !== B && k(n, t))
@@ -1816,10 +1816,10 @@ const us = (e) => e ? Fr(e) ? jn(e) : us(e.parent) : null, mt = (
         fs && (i[t] = 0);
       }
     }
-    const d = mt[t];
+    const p = mt[t];
     let f, g;
-    if (d)
-      return t === "$attrs" ? (ne(e.attrs, "get", ""), process.env.NODE_ENV !== "production" && Dn()) : process.env.NODE_ENV !== "production" && t === "$slots" && ne(e, "get", t), d(e);
+    if (p)
+      return t === "$attrs" ? (ne(e.attrs, "get", ""), process.env.NODE_ENV !== "production" && Dn()) : process.env.NODE_ENV !== "production" && t === "$slots" && ne(e, "get", t), p(e);
     if (
       // css module (injected by vue-loader)
       (f = l.__cssModules) && (f = f[t])
@@ -1940,9 +1940,9 @@ function Dl(e) {
     methods: i,
     watch: l,
     provide: a,
-    inject: p,
+    inject: d,
     // lifecycle
-    created: d,
+    created: p,
     beforeMount: f,
     mounted: g,
     beforeUpdate: x,
@@ -1972,7 +1972,7 @@ function Dl(e) {
       for (const j in H)
         ye("Props", j);
   }
-  if (p && Sl(p, s, ye), i)
+  if (d && Sl(d, s, ye), i)
     for (const H in i) {
       const j = i[H];
       A(j) ? (process.env.NODE_ENV !== "production" ? Object.defineProperty(s, H, {
@@ -2030,11 +2030,11 @@ function Dl(e) {
       Il(j, H[j]);
     });
   }
-  d && Zs(d, e, "c");
+  p && Zs(p, e, "c");
   function ae(H, j) {
     M(j) ? j.forEach(($e) => H($e.bind(n))) : j && H(j.bind(n));
   }
-  if (ae(pl, f), ae(dr, g), ae(hl, x), ae(gl, S), ae(ul, I), ae(fl, te), ae(yl, oe), ae(bl, Z), ae(_l, me), ae(ml, J), ae(Rs, ce), ae(vl, R), M($))
+  if (ae(dl, f), ae(pr, g), ae(hl, x), ae(gl, S), ae(ul, I), ae(fl, te), ae(yl, oe), ae(bl, Z), ae(_l, me), ae(ml, J), ae(Rs, ce), ae(vl, R), M($))
     if ($.length) {
       const H = e.exposed || (e.exposed = {});
       $.forEach((j) => {
@@ -2047,15 +2047,15 @@ function Dl(e) {
   V && e.render === se && (e.render = V), Y != null && (e.inheritAttrs = Y), re && (e.components = re), _t && (e.directives = _t), R && ur(e);
 }
 function Sl(e, t, n = se) {
-  M(e) && (e = ds(e));
+  M(e) && (e = ps(e));
   for (const s in e) {
     const o = e[s];
     let r;
-    G(o) ? "default" in o ? r = pn(
+    G(o) ? "default" in o ? r = dn(
       o.from || s,
       o.default,
       !0
-    ) : r = pn(o.from || s) : r = pn(o), Q(r) ? Object.defineProperty(t, s, {
+    ) : r = dn(o.from || s) : r = dn(o), Q(r) ? Object.defineProperty(t, s, {
       enumerable: !0,
       configurable: !0,
       get: () => r.value,
@@ -2094,7 +2094,7 @@ function mr(e) {
   } = e.appContext, l = r.get(t);
   let a;
   return l ? a = l : !o.length && !n && !s ? a = t : (a = {}, o.length && o.forEach(
-    (p) => wn(a, p, i, !0)
+    (d) => wn(a, d, i, !0)
   ), wn(a, t, i)), G(t) && r.set(t, a), a;
 }
 function wn(e, t, n, s = !1) {
@@ -2121,20 +2121,20 @@ const Tl = {
   methods: Ht,
   computed: Ht,
   // lifecycle
-  beforeCreate: pe,
-  created: pe,
-  beforeMount: pe,
-  mounted: pe,
-  beforeUpdate: pe,
-  updated: pe,
-  beforeDestroy: pe,
-  beforeUnmount: pe,
-  destroyed: pe,
-  unmounted: pe,
-  activated: pe,
-  deactivated: pe,
-  errorCaptured: pe,
-  serverPrefetch: pe,
+  beforeCreate: de,
+  created: de,
+  beforeMount: de,
+  mounted: de,
+  beforeUpdate: de,
+  updated: de,
+  beforeDestroy: de,
+  beforeUnmount: de,
+  destroyed: de,
+  unmounted: de,
+  activated: de,
+  deactivated: de,
+  errorCaptured: de,
+  serverPrefetch: de,
   // assets
   components: Ht,
   directives: Ht,
@@ -2153,9 +2153,9 @@ function Qs(e, t) {
   } : t : e;
 }
 function Vl(e, t) {
-  return Ht(ds(e), ds(t));
+  return Ht(ps(e), ps(t));
 }
-function ds(e) {
+function ps(e) {
   if (M(e)) {
     const t = {};
     for (let n = 0; n < e.length; n++)
@@ -2164,7 +2164,7 @@ function ds(e) {
   }
   return e;
 }
-function pe(e, t) {
+function de(e, t) {
   return e ? [...new Set([].concat(e, t))] : t;
 }
 function Ht(e, t) {
@@ -2182,7 +2182,7 @@ function Cl(e, t) {
   if (!t) return e;
   const n = ee(/* @__PURE__ */ Object.create(null), e);
   for (const s in t)
-    n[s] = pe(e[s], t[s]);
+    n[s] = de(e[s], t[s]);
   return n;
 }
 function vr() {
@@ -2212,7 +2212,7 @@ function Al(e, t) {
     A(s) || (s = ee({}, s)), o != null && !G(o) && (process.env.NODE_ENV !== "production" && N("root props passed to app.mount() must be an object."), o = null);
     const r = vr(), i = /* @__PURE__ */ new WeakSet(), l = [];
     let a = !1;
-    const p = r.app = {
+    const d = r.app = {
       _uid: Ml++,
       _component: s,
       _props: o,
@@ -2223,73 +2223,73 @@ function Al(e, t) {
       get config() {
         return r.config;
       },
-      set config(d) {
+      set config(p) {
         process.env.NODE_ENV !== "production" && N(
           "app.config cannot be replaced. Modify individual options instead."
         );
       },
-      use(d, ...f) {
-        return i.has(d) ? process.env.NODE_ENV !== "production" && N("Plugin has already been applied to target app.") : d && A(d.install) ? (i.add(d), d.install(p, ...f)) : A(d) ? (i.add(d), d(p, ...f)) : process.env.NODE_ENV !== "production" && N(
+      use(p, ...f) {
+        return i.has(p) ? process.env.NODE_ENV !== "production" && N("Plugin has already been applied to target app.") : p && A(p.install) ? (i.add(p), p.install(d, ...f)) : A(p) ? (i.add(p), p(d, ...f)) : process.env.NODE_ENV !== "production" && N(
           'A plugin must either be a function or an object with an "install" function.'
-        ), p;
+        ), d;
       },
-      mixin(d) {
-        return r.mixins.includes(d) ? process.env.NODE_ENV !== "production" && N(
-          "Mixin has already been applied to target app" + (d.name ? `: ${d.name}` : "")
-        ) : r.mixins.push(d), p;
+      mixin(p) {
+        return r.mixins.includes(p) ? process.env.NODE_ENV !== "production" && N(
+          "Mixin has already been applied to target app" + (p.name ? `: ${p.name}` : "")
+        ) : r.mixins.push(p), d;
       },
-      component(d, f) {
-        return process.env.NODE_ENV !== "production" && vs(d, r.config), f ? (process.env.NODE_ENV !== "production" && r.components[d] && N(`Component "${d}" has already been registered in target app.`), r.components[d] = f, p) : r.components[d];
+      component(p, f) {
+        return process.env.NODE_ENV !== "production" && vs(p, r.config), f ? (process.env.NODE_ENV !== "production" && r.components[p] && N(`Component "${p}" has already been registered in target app.`), r.components[p] = f, d) : r.components[p];
       },
-      directive(d, f) {
-        return process.env.NODE_ENV !== "production" && ar(d), f ? (process.env.NODE_ENV !== "production" && r.directives[d] && N(`Directive "${d}" has already been registered in target app.`), r.directives[d] = f, p) : r.directives[d];
+      directive(p, f) {
+        return process.env.NODE_ENV !== "production" && ar(p), f ? (process.env.NODE_ENV !== "production" && r.directives[p] && N(`Directive "${p}" has already been registered in target app.`), r.directives[p] = f, d) : r.directives[p];
       },
-      mount(d, f, g) {
+      mount(p, f, g) {
         if (a)
           process.env.NODE_ENV !== "production" && N(
             "App has already been mounted.\nIf you want to remount the same app, move your app creation logic into a factory function and create fresh app instances for each mount - e.g. `const createMyApp = () => createApp(App)`"
           );
         else {
-          process.env.NODE_ENV !== "production" && d.__vue_app__ && N(
+          process.env.NODE_ENV !== "production" && p.__vue_app__ && N(
             "There is already an app instance mounted on the host container.\n If you want to mount another app on the same host container, you need to unmount the previous app by calling `app.unmount()` first."
           );
-          const x = p._ceVNode || Se(s, o);
+          const x = d._ceVNode || Se(s, o);
           return x.appContext = r, g === !0 ? g = "svg" : g === !1 && (g = void 0), process.env.NODE_ENV !== "production" && (r.reload = () => {
             const S = it(x);
-            S.el = null, e(S, d, g);
-          }), e(x, d, g), a = !0, p._container = d, d.__vue_app__ = p, process.env.NODE_ENV !== "production" && (p._instance = x.component, Xi(p, po)), jn(x.component);
+            S.el = null, e(S, p, g);
+          }), e(x, p, g), a = !0, d._container = p, p.__vue_app__ = d, process.env.NODE_ENV !== "production" && (d._instance = x.component, Xi(d, po)), jn(x.component);
         }
       },
-      onUnmount(d) {
-        process.env.NODE_ENV !== "production" && typeof d != "function" && N(
-          `Expected function as first argument to app.onUnmount(), but got ${typeof d}`
-        ), l.push(d);
+      onUnmount(p) {
+        process.env.NODE_ENV !== "production" && typeof p != "function" && N(
+          `Expected function as first argument to app.onUnmount(), but got ${typeof p}`
+        ), l.push(p);
       },
       unmount() {
         a ? (Be(
           l,
-          p._instance,
+          d._instance,
           16
-        ), e(null, p._container), process.env.NODE_ENV !== "production" && (p._instance = null, Zi(p)), delete p._container.__vue_app__) : process.env.NODE_ENV !== "production" && N("Cannot unmount an app that is not mounted.");
+        ), e(null, d._container), process.env.NODE_ENV !== "production" && (d._instance = null, Zi(d)), delete d._container.__vue_app__) : process.env.NODE_ENV !== "production" && N("Cannot unmount an app that is not mounted.");
       },
-      provide(d, f) {
-        return process.env.NODE_ENV !== "production" && d in r.provides && (k(r.provides, d) ? N(
-          `App already provides property with key "${String(d)}". It will be overwritten with the new value.`
+      provide(p, f) {
+        return process.env.NODE_ENV !== "production" && p in r.provides && (k(r.provides, p) ? N(
+          `App already provides property with key "${String(p)}". It will be overwritten with the new value.`
         ) : N(
-          `App already provides property with key "${String(d)}" inherited from its parent element. It will be overwritten with the new value.`
-        )), r.provides[d] = f, p;
+          `App already provides property with key "${String(p)}" inherited from its parent element. It will be overwritten with the new value.`
+        )), r.provides[p] = f, d;
       },
-      runWithContext(d) {
+      runWithContext(p) {
         const f = Tt;
-        Tt = p;
+        Tt = d;
         try {
-          return d();
+          return p();
         } finally {
           Tt = f;
         }
       }
     };
-    return p;
+    return d;
   };
 }
 let Tt = null;
@@ -2302,7 +2302,7 @@ function Il(e, t) {
     s === n && (n = ie.provides = Object.create(s)), n[e] = t;
   }
 }
-function pn(e, t, n = !1) {
+function dn(e, t, n = !1) {
   const s = ie || fe;
   if (s || Tt) {
     let o = Tt ? Tt._context.provides : s ? s.parent == null || s.ce ? s.vnode.appContext && s.vnode.appContext.provides : s.parent.provides : void 0;
@@ -2333,7 +2333,7 @@ function Rl(e, t, n, s) {
     attrs: r,
     vnode: { patchFlag: i }
   } = e, l = F(o), [a] = e.propsOptions;
-  let p = !1;
+  let d = !1;
   if (
     // always force full diff in dev
     // - #1942 if hmr is enabled with sfc component
@@ -2341,18 +2341,18 @@ function Rl(e, t, n, s) {
     !(process.env.NODE_ENV !== "production" && Pl(e)) && (s || i > 0) && !(i & 16)
   ) {
     if (i & 8) {
-      const d = e.vnode.dynamicProps;
-      for (let f = 0; f < d.length; f++) {
-        let g = d[f];
+      const p = e.vnode.dynamicProps;
+      for (let f = 0; f < p.length; f++) {
+        let g = p[f];
         if (Rn(e.emitsOptions, g))
           continue;
         const x = t[g];
         if (a)
           if (k(r, g))
-            x !== r[g] && (r[g] = x, p = !0);
+            x !== r[g] && (r[g] = x, d = !0);
           else {
             const S = Ce(g);
-            o[S] = ps(
+            o[S] = ds(
               a,
               l,
               S,
@@ -2362,19 +2362,19 @@ function Rl(e, t, n, s) {
             );
           }
         else
-          x !== r[g] && (r[g] = x, p = !0);
+          x !== r[g] && (r[g] = x, d = !0);
       }
     }
   } else {
-    Er(e, t, o, r) && (p = !0);
-    let d;
+    Er(e, t, o, r) && (d = !0);
+    let p;
     for (const f in l)
       (!t || // for camelCase
       !k(t, f) && // it's possible the original props was passed in as kebab-case
       // and converted to camelCase (#955)
-      ((d = Xe(f)) === f || !k(t, d))) && (a ? n && // for camelCase
+      ((p = Xe(f)) === f || !k(t, p))) && (a ? n && // for camelCase
       (n[f] !== void 0 || // for kebab-case
-      n[d] !== void 0) && (o[f] = ps(
+      n[p] !== void 0) && (o[f] = ds(
         a,
         l,
         f,
@@ -2384,9 +2384,9 @@ function Rl(e, t, n, s) {
       )) : delete o[f]);
     if (r !== l)
       for (const f in r)
-        (!t || !k(t, f)) && (delete r[f], p = !0);
+        (!t || !k(t, f)) && (delete r[f], d = !0);
   }
-  p && Le(e.attrs, "set", ""), process.env.NODE_ENV !== "production" && xr(t || {}, o, e);
+  d && Le(e.attrs, "set", ""), process.env.NODE_ENV !== "production" && xr(t || {}, o, e);
 }
 function Er(e, t, n, s) {
   const [o, r] = e.propsOptions;
@@ -2395,42 +2395,42 @@ function Er(e, t, n, s) {
     for (let a in t) {
       if (Lt(a))
         continue;
-      const p = t[a];
-      let d;
-      o && k(o, d = Ce(a)) ? !r || !r.includes(d) ? n[d] = p : (l || (l = {}))[d] = p : Rn(e.emitsOptions, a) || (!(a in s) || p !== s[a]) && (s[a] = p, i = !0);
+      const d = t[a];
+      let p;
+      o && k(o, p = Ce(a)) ? !r || !r.includes(p) ? n[p] = d : (l || (l = {}))[p] = d : Rn(e.emitsOptions, a) || (!(a in s) || d !== s[a]) && (s[a] = d, i = !0);
     }
   if (r) {
-    const a = F(n), p = l || B;
-    for (let d = 0; d < r.length; d++) {
-      const f = r[d];
-      n[f] = ps(
+    const a = F(n), d = l || B;
+    for (let p = 0; p < r.length; p++) {
+      const f = r[p];
+      n[f] = ds(
         o,
         a,
         f,
-        p[f],
+        d[f],
         e,
-        !k(p, f)
+        !k(d, f)
       );
     }
   }
   return i;
 }
-function ps(e, t, n, s, o, r) {
+function ds(e, t, n, s, o, r) {
   const i = e[n];
   if (i != null) {
     const l = k(i, "default");
     if (l && s === void 0) {
       const a = i.default;
       if (i.type !== Function && !i.skipFactory && A(a)) {
-        const { propsDefaults: p } = o;
-        if (n in p)
-          s = p[n];
+        const { propsDefaults: d } = o;
+        if (n in d)
+          s = d[n];
         else {
-          const d = on(o);
-          s = p[n] = a.call(
+          const p = on(o);
+          s = d[n] = a.call(
             null,
             t
-          ), d();
+          ), p();
         }
       } else
         s = a;
@@ -2454,27 +2454,27 @@ function Nr(e, t, n = !1) {
   const r = e.props, i = {}, l = [];
   let a = !1;
   if (!A(e)) {
-    const d = (f) => {
+    const p = (f) => {
       a = !0;
       const [g, x] = Nr(f, t, !0);
       ee(i, g), x && l.push(...x);
     };
-    !n && t.mixins.length && t.mixins.forEach(d), e.extends && d(e.extends), e.mixins && e.mixins.forEach(d);
+    !n && t.mixins.length && t.mixins.forEach(p), e.extends && p(e.extends), e.mixins && e.mixins.forEach(p);
   }
   if (!r && !a)
     return G(e) && s.set(e, Dt), Dt;
   if (M(r))
-    for (let d = 0; d < r.length; d++) {
-      process.env.NODE_ENV !== "production" && !X(r[d]) && N("props must be strings when using array syntax.", r[d]);
-      const f = Ce(r[d]);
+    for (let p = 0; p < r.length; p++) {
+      process.env.NODE_ENV !== "production" && !X(r[p]) && N("props must be strings when using array syntax.", r[p]);
+      const f = Ce(r[p]);
       to(f) && (i[f] = B);
     }
   else if (r) {
     process.env.NODE_ENV !== "production" && !G(r) && N("invalid props options", r);
-    for (const d in r) {
-      const f = Ce(d);
+    for (const p in r) {
+      const f = Ce(p);
       if (to(f)) {
-        const g = r[d], x = i[f] = M(g) || A(g) ? { type: g } : ee({}, g), S = x.type;
+        const g = r[p], x = i[f] = M(g) || A(g) ? { type: g } : ee({}, g), S = x.type;
         let I = !1, te = !0;
         if (M(S))
           for (let K = 0; K < S.length; ++K) {
@@ -2496,8 +2496,8 @@ function Nr(e, t, n = !1) {
       }
     }
   }
-  const p = [i, l];
-  return G(e) && s.set(e, p), p;
+  const d = [i, l];
+  return G(e) && s.set(e, d), d;
 }
 function to(e) {
   return e[0] !== "$" && !Lt(e) ? !0 : (process.env.NODE_ENV !== "production" && N(`Invalid prop name: "${e}" is a reserved property.`), !1);
@@ -2526,13 +2526,13 @@ function Hl(e, t, n, s, o) {
   }
   if (!(t == null && !i)) {
     if (r != null && r !== !0 && !a) {
-      let p = !1;
-      const d = M(r) ? r : [r], f = [];
-      for (let g = 0; g < d.length && !p; g++) {
-        const { valid: x, expectedType: S } = kl(t, d[g]);
-        f.push(S || ""), p = x;
+      let d = !1;
+      const p = M(r) ? r : [r], f = [];
+      for (let g = 0; g < p.length && !d; g++) {
+        const { valid: x, expectedType: S } = kl(t, p[g]);
+        f.push(S || ""), d = x;
       }
-      if (!p) {
+      if (!d) {
         N(Ul(e, t, f));
         return;
       }
@@ -2667,8 +2667,8 @@ function Jl(e, t) {
     createElement: i,
     createText: l,
     createComment: a,
-    setText: p,
-    setElementText: d,
+    setText: d,
+    setElementText: p,
     parentNode: f,
     nextSibling: g,
     setScopeId: x = se,
@@ -2745,7 +2745,7 @@ function Jl(e, t) {
       );
     else {
       const m = u.el = c.el;
-      u.children !== c.children && p(m, u.children);
+      u.children !== c.children && d(m, u.children);
     }
   }, K = (c, u, h, _) => {
     c == null ? s(
@@ -2810,7 +2810,7 @@ function Jl(e, t) {
       v,
       C && C.is,
       C
-    ), O & 8 ? d(y, c.children) : O & 16 && R(
+    ), O & 8 ? p(y, c.children) : O & 16 && R(
       c.children,
       y,
       null,
@@ -2868,7 +2868,7 @@ function Jl(e, t) {
     y |= c.patchFlag & 16;
     const O = c.props || B, T = u.props || B;
     let P;
-    if (h && at(h, !1), (P = T.onVnodeBeforeUpdate) && je(P, h, u, c), C && ct(u, c, h, "beforeUpdate"), h && at(h, !0), process.env.NODE_ENV !== "production" && Ue && (y = 0, w = !1, b = null), (O.innerHTML && T.innerHTML == null || O.textContent && T.textContent == null) && d(E, ""), b ? (Y(
+    if (h && at(h, !1), (P = T.onVnodeBeforeUpdate) && je(P, h, u, c), C && ct(u, c, h, "beforeUpdate"), h && at(h, !0), process.env.NODE_ENV !== "production" && Ue && (y = 0, w = !1, b = null), (O.innerHTML && T.innerHTML == null || O.textContent && T.textContent == null) && p(E, ""), b ? (Y(
       c.dynamicChildren,
       b,
       E,
@@ -2896,7 +2896,7 @@ function Jl(e, t) {
           (_e !== ve || q === "value") && r(E, q, ve, _e, m, h);
         }
       }
-      y & 1 && c.children !== u.children && d(E, u.children);
+      y & 1 && c.children !== u.children && p(E, u.children);
     } else !w && b == null && re(E, O, T, h, m);
     ((P = T.onVnodeUpdated) || C) && Ee(() => {
       P && je(P, h, u, c), C && ct(u, c, h, "updated");
@@ -3145,7 +3145,7 @@ function Jl(e, t) {
         return;
       }
     }
-    P & 8 ? (C & 16 && At(b, m, v), O !== b && d(h, O)) : C & 16 ? P & 16 ? Mt(
+    P & 8 ? (C & 16 && At(b, m, v), O !== b && p(h, O)) : C & 16 ? P & 16 ? Mt(
       b,
       O,
       h,
@@ -3155,7 +3155,7 @@ function Jl(e, t) {
       w,
       E,
       y
-    ) : At(b, m, v, !0) : (C & 8 && d(h, ""), P & 16 && R(
+    ) : At(b, m, v, !0) : (C & 8 && p(h, ""), P & 16 && R(
       O,
       h,
       _,
@@ -3263,12 +3263,12 @@ function Jl(e, t) {
     else {
       const P = b, L = b, z = /* @__PURE__ */ new Map();
       for (b = L; b <= T; b++) {
-        const de = u[b] = y ? nt(u[b]) : Te(u[b]);
-        de.key != null && (process.env.NODE_ENV !== "production" && z.has(de.key) && N(
+        const pe = u[b] = y ? nt(u[b]) : Te(u[b]);
+        pe.key != null && (process.env.NODE_ENV !== "production" && z.has(pe.key) && N(
           "Duplicate keys found during update:",
-          JSON.stringify(de.key),
+          JSON.stringify(pe.key),
           "Make sure keys are unique."
-        ), z.set(de.key, b));
+        ), z.set(pe.key, b));
       }
       let q, ve = 0;
       const _e = T - L + 1;
@@ -3276,22 +3276,22 @@ function Jl(e, t) {
       const $t = new Array(_e);
       for (b = 0; b < _e; b++) $t[b] = 0;
       for (b = P; b <= O; b++) {
-        const de = c[b];
+        const pe = c[b];
         if (ve >= _e) {
-          et(de, m, v, !0);
+          et(pe, m, v, !0);
           continue;
         }
         let Fe;
-        if (de.key != null)
-          Fe = z.get(de.key);
+        if (pe.key != null)
+          Fe = z.get(pe.key);
         else
           for (q = L; q <= T; q++)
-            if ($t[q - L] === 0 && Ft(de, u[q])) {
+            if ($t[q - L] === 0 && Ft(pe, u[q])) {
               Fe = q;
               break;
             }
-        Fe === void 0 ? et(de, m, v, !0) : ($t[Fe - L] = b + 1, Fe >= Re ? Re = Fe : Pe = !0, I(
-          de,
+        Fe === void 0 ? et(pe, m, v, !0) : ($t[Fe - L] = b + 1, Fe >= Re ? Re = Fe : Pe = !0, I(
+          pe,
           u[Fe],
           h,
           null,
@@ -3304,7 +3304,7 @@ function Jl(e, t) {
       }
       const Ks = Pe ? Xl($t) : Dt;
       for (q = Ks.length - 1, b = _e - 1; b >= 0; b--) {
-        const de = L + b, Fe = u[de], Ws = de + 1 < C ? u[de + 1].el : _;
+        const pe = L + b, Fe = u[pe], Ws = pe + 1 < C ? u[pe + 1].el : _;
         $t[b] === 0 ? I(
           null,
           Fe,
@@ -3512,15 +3512,15 @@ function Xl(e) {
   let s, o, r, i, l;
   const a = e.length;
   for (s = 0; s < a; s++) {
-    const p = e[s];
-    if (p !== 0) {
-      if (o = n[n.length - 1], e[o] < p) {
+    const d = e[s];
+    if (d !== 0) {
+      if (o = n[n.length - 1], e[o] < d) {
         t[s] = o, n.push(s);
         continue;
       }
       for (r = 0, i = n.length - 1; r < i; )
-        l = r + i >> 1, e[n[l]] < p ? r = l + 1 : i = l;
-      p < e[n[r]] && (r > 0 && (t[s] = n[r - 1]), n[r] = s);
+        l = r + i >> 1, e[n[l]] < d ? r = l + 1 : i = l;
+      d < e[n[r]] && (r > 0 && (t[s] = n[r - 1]), n[r] = s);
     }
   }
   for (r = n.length, i = n[r - 1]; r-- > 0; )
@@ -3539,7 +3539,7 @@ function oo(e) {
 }
 const Zl = Symbol.for("v-scx"), Ql = () => {
   {
-    const e = pn(Zl);
+    const e = dn(Zl);
     return e || process.env.NODE_ENV !== "production" && N(
       "Server rendering context not provided. Make sure to only call useSSRContext() conditionally in the server build."
     ), e;
@@ -3562,29 +3562,29 @@ function Sr(e, t, n = B) {
   const l = ee({}, n);
   process.env.NODE_ENV !== "production" && (l.onWarn = N);
   const a = t && s || !t && r !== "post";
-  let p;
+  let d;
   if (Zt) {
     if (r === "sync") {
       const x = Ql();
-      p = x.__watcherHandles || (x.__watcherHandles = []);
+      d = x.__watcherHandles || (x.__watcherHandles = []);
     } else if (!a) {
       const x = () => {
       };
       return x.stop = se, x.resume = se, x.pause = se, x;
     }
   }
-  const d = ie;
-  l.call = (x, S, I) => Be(x, d, S, I);
+  const p = ie;
+  l.call = (x, S, I) => Be(x, p, S, I);
   let f = !1;
   r === "post" ? l.scheduler = (x) => {
-    Ee(x, d && d.suspense);
+    Ee(x, p && p.suspense);
   } : r !== "sync" && (f = !0, l.scheduler = (x, S) => {
     S ? x() : $n(x);
   }), l.augmentJob = (x) => {
-    t && (x.flags |= 4), f && (x.flags |= 2, d && (x.id = d.uid, x.i = d));
+    t && (x.flags |= 4), f && (x.flags |= 2, p && (x.id = p.uid, x.i = p));
   };
   const g = Hi(e, t, l);
-  return Zt && (p ? p.push(g) : a && g()), g;
+  return Zt && (d ? d.push(g) : a && g()), g;
 }
 function ec(e, t, n) {
   const s = this.proxy, o = X(e) ? e.includes(".") ? Tr(s, e) : () => s[e] : e.bind(s, s);
@@ -3608,16 +3608,16 @@ function nc(e, t, ...n) {
   const s = e.vnode.props || B;
   if (process.env.NODE_ENV !== "production") {
     const {
-      emitsOptions: d,
+      emitsOptions: p,
       propsOptions: [f]
     } = e;
-    if (d)
-      if (!(t in d))
+    if (p)
+      if (!(t in p))
         (!f || !(ut(Ce(t)) in f)) && N(
           `Component emitted event "${t}" but it is neither declared in the emits option nor as an "${ut(Ce(t))}" prop.`
         );
       else {
-        const g = d[t];
+        const g = p[t];
         A(g) && (g(...n) || N(
           `Invalid event arguments: event validation failed for event "${t}".`
         ));
@@ -3625,10 +3625,10 @@ function nc(e, t, ...n) {
   }
   let o = n;
   const r = t.startsWith("update:"), i = r && tc(s, t.slice(7));
-  if (i && (i.trim && (o = n.map((d) => X(d) ? d.trim() : d)), i.number && (o = n.map(ss))), process.env.NODE_ENV !== "production" && ol(e, t, o), process.env.NODE_ENV !== "production") {
-    const d = t.toLowerCase();
-    d !== t && s[ut(d)] && N(
-      `Event "${d}" is emitted in component ${Hn(
+  if (i && (i.trim && (o = n.map((p) => X(p) ? p.trim() : p)), i.number && (o = n.map(ss))), process.env.NODE_ENV !== "production" && ol(e, t, o), process.env.NODE_ENV !== "production") {
+    const p = t.toLowerCase();
+    p !== t && s[ut(p)] && N(
+      `Event "${p}" is emitted in component ${Hn(
         e,
         e.type
       )} but the handler is registered for "${t}". Note that HTML attributes are case-insensitive and you cannot use v-on to listen to camelCase events when using in-DOM templates. You should probably use "${Xe(
@@ -3644,14 +3644,14 @@ function nc(e, t, ...n) {
     6,
     o
   );
-  const p = s[l + "Once"];
-  if (p) {
+  const d = s[l + "Once"];
+  if (d) {
     if (!e.emitted)
       e.emitted = {};
     else if (e.emitted[l])
       return;
     e.emitted[l] = !0, Be(
-      p,
+      d,
       e,
       6,
       o
@@ -3665,9 +3665,9 @@ function Vr(e, t, n = !1) {
   const r = e.emits;
   let i = {}, l = !1;
   if (!A(e)) {
-    const a = (p) => {
-      const d = Vr(p, t, !0);
-      d && (l = !0, ee(i, d));
+    const a = (d) => {
+      const p = Vr(d, t, !0);
+      p && (l = !0, ee(i, p));
     };
     !n && t.mixins.length && t.mixins.forEach(a), e.extends && a(e.extends), e.mixins && e.mixins.forEach(a);
   }
@@ -3690,8 +3690,8 @@ function ro(e) {
     slots: i,
     attrs: l,
     emit: a,
-    render: p,
-    renderCache: d,
+    render: d,
+    renderCache: p,
     props: f,
     data: g,
     setupState: x,
@@ -3712,10 +3712,10 @@ function ro(e) {
         }
       }) : V;
       K = Te(
-        p.call(
+        d.call(
           Z,
           V,
-          d,
+          p,
           process.env.NODE_ENV !== "production" ? ke(f) : f,
           x,
           g,
@@ -3811,24 +3811,24 @@ const sc = (e) => {
   return n;
 }, io = (e) => e.shapeFlag & 7 || e.type === we;
 function rc(e, t, n) {
-  const { props: s, children: o, component: r } = e, { props: i, children: l, patchFlag: a } = t, p = r.emitsOptions;
+  const { props: s, children: o, component: r } = e, { props: i, children: l, patchFlag: a } = t, d = r.emitsOptions;
   if (process.env.NODE_ENV !== "production" && (o || l) && Ue || t.dirs || t.transition)
     return !0;
   if (n && a >= 0) {
     if (a & 1024)
       return !0;
     if (a & 16)
-      return s ? lo(s, i, p) : !!i;
+      return s ? lo(s, i, d) : !!i;
     if (a & 8) {
-      const d = t.dynamicProps;
-      for (let f = 0; f < d.length; f++) {
-        const g = d[f];
-        if (i[g] !== s[g] && !Rn(p, g))
+      const p = t.dynamicProps;
+      for (let f = 0; f < p.length; f++) {
+        const g = p[f];
+        if (i[g] !== s[g] && !Rn(d, g))
           return !0;
       }
     }
   } else
-    return (o || l) && (!l || !l.$stable) ? !0 : s === i ? !1 : s ? i ? lo(s, i, p) : !0 : !!i;
+    return (o || l) && (!l || !l.$stable) ? !0 : s === i ? !1 : s ? i ? lo(s, i, d) : !0 : !!i;
   return !1;
 }
 function lo(e, t, n) {
@@ -3900,7 +3900,7 @@ function Fn(e) {
 }
 function Ft(e, t) {
   if (process.env.NODE_ENV !== "production" && t.shapeFlag & 6 && e.component) {
-    const n = dn.get(t.type);
+    const n = pn.get(t.type);
     if (n && n.has(e.component))
       return e.shapeFlag &= -257, t.shapeFlag &= -513, !1;
   }
@@ -3990,12 +3990,12 @@ function fc(e) {
   return e ? _n(e) || yr(e) ? ee({}, e) : e : null;
 }
 function it(e, t, n = !1, s = !1) {
-  const { props: o, ref: r, patchFlag: i, children: l, transition: a } = e, p = t ? pc(o || {}, t) : o, d = {
+  const { props: o, ref: r, patchFlag: i, children: l, transition: a } = e, d = t ? dc(o || {}, t) : o, p = {
     __v_isVNode: !0,
     __v_skip: !0,
     type: e.type,
-    props: p,
-    key: p && Ir(p),
+    props: d,
+    key: d && Ir(d),
     ref: t && t.ref ? (
       // #2078 in the case of <component :is="vnode" ref="extra"/>
       // if the vnode itself already has a ref, cloneVNode will need to merge
@@ -4034,9 +4034,9 @@ function it(e, t, n = !1, s = !1) {
     ce: e.ce
   };
   return a && s && Is(
-    d,
-    a.clone(d)
-  ), d;
+    p,
+    a.clone(p)
+  ), p;
 }
 function Pr(e) {
   const t = it(e);
@@ -4045,7 +4045,7 @@ function Pr(e) {
 function Rr(e = " ", t = 0) {
   return Se(sn, null, e, t);
 }
-function dc(e, t) {
+function pc(e, t) {
   const n = Se(Bt, null, e);
   return n.staticCount = t, n;
 }
@@ -4083,7 +4083,7 @@ function ks(e, t) {
   else A(t) ? (t = { default: t, _ctx: fe }, n = 32) : (t = String(t), s & 64 ? (n = 16, t = [Rr(t)]) : n = 8);
   e.children = t, e.shapeFlag |= n;
 }
-function pc(...e) {
+function dc(...e) {
   const t = {};
   for (let n = 0; n < e.length; n++) {
     const s = e[n];
@@ -4261,15 +4261,15 @@ function yc(e, t) {
     ), a = ys(l);
     if (Ie(), i(), (a || e.sp) && !Wt(e) && ur(e), a) {
       if (l.then(ao, ao), t)
-        return l.then((p) => {
-          uo(e, p, t);
-        }).catch((p) => {
-          tn(p, e, 0);
+        return l.then((d) => {
+          uo(e, d, t);
+        }).catch((d) => {
+          tn(d, e, 0);
         });
       if (e.asyncDep = l, process.env.NODE_ENV !== "production" && !e.suspense) {
-        const p = (n = s.name) != null ? n : "Anonymous";
+        const d = (n = s.name) != null ? n : "Anonymous";
         N(
-          `Component <${p}>: setup function returned a promise, but no <Suspense> boundary was found in the parent component tree. A component with async setup() must be nested in a <Suspense> in order to be rendered.`
+          `Component <${d}>: setup function returned a promise, but no <Suspense> boundary was found in the parent component tree. A component with async setup() must be nested in a <Suspense> in order to be rendered.`
         );
       }
     } else
@@ -4417,7 +4417,7 @@ function Sc() {
         return Ie(), [
           "div",
           {},
-          ["span", e, d(f)],
+          ["span", e, p(f)],
           "<",
           l(g),
           ">"
@@ -4509,15 +4509,15 @@ function Sc() {
       return;
     const S = {};
     for (const I in f.ctx)
-      p(x, I, g) && (S[I] = f.ctx[I]);
+      d(x, I, g) && (S[I] = f.ctx[I]);
     return S;
   }
-  function p(f, g, x) {
+  function d(f, g, x) {
     const S = f[x];
-    if (M(S) && S.includes(g) || G(S) && g in S || f.extends && p(f.extends, g, x) || f.mixins && f.mixins.some((I) => p(I, g, x)))
+    if (M(S) && S.includes(g) || G(S) && g in S || f.extends && d(f.extends, g, x) || f.mixins && f.mixins.some((I) => d(I, g, x)))
       return !0;
   }
-  function d(f) {
+  function p(f) {
     return ge(f) ? "ShallowRef" : f.effect ? "ComputedRef" : "Ref";
   }
   window.devtoolsFormatters ? window.devtoolsFormatters.push(o) : window.devtoolsFormatters = [o];
@@ -4711,11 +4711,11 @@ function Lc(e, t, n, s, o = null) {
   else {
     const [l, a] = kc(t);
     if (s) {
-      const p = r[t] = Wc(
+      const d = r[t] = Wc(
         process.env.NODE_ENV !== "production" ? wo(s, t) : s,
         o
       );
-      Ot(e, l, p, a);
+      Ot(e, l, d, a);
     } else i && (Hc(e, l, i, a), r[t] = void 0);
   }
 }
@@ -4917,7 +4917,7 @@ const ia = { class: "flex justify-between border-b border-border/70 bg-bg-second
     const t = e, n = (s) => `px-4 py-3 text-sm font-medium transition-colors duration-200 border-b-2 ${s === t.activeTab ? "text-primary border-primary bg-primary/5" : "text-content-secondary border-transparent hover:text-content hover:border-border"}`;
     return (s, o) => (Ne(), Oe("div", ia, [
       D("div", la, [
-        (Ne(!0), Oe(De, null, pr(s.tabs, (r) => (Ne(), Oe("button", {
+        (Ne(!0), Oe(De, null, dr(s.tabs, (r) => (Ne(), Oe("button", {
           key: r.id,
           class: ot(n(r.id)),
           onClick: (i) => s.$emit("tab-change", r.id)
@@ -4928,7 +4928,7 @@ const ia = { class: "flex justify-between border-b border-border/70 bg-bg-second
       ])
     ]));
   }
-}), fa = { class: "h-full flex flex-col" }, da = { class: "bg-bg-secondary border-b border-border px-6 py-3" }, pa = { class: "flex items-center justify-between" }, ha = { class: "flex items-center gap-6" }, ga = { class: "flex items-center gap-2" }, ma = { class: "flex items-center gap-2" }, va = { class: "flex items-center gap-4 text-xs text-content-secondary" }, _a = { class: "bg-bg-secondary border-b border-border px-6 py-2" }, ba = { class: "flex items-center gap-2" }, ya = ["disabled"], Ea = { class: "flex-1 min-h-0" }, Na = {
+}), fa = { class: "h-full flex flex-col" }, pa = { class: "bg-bg-secondary border-b border-border px-6 py-3" }, da = { class: "flex items-center justify-between" }, ha = { class: "flex items-center gap-6" }, ga = { class: "flex items-center gap-2" }, ma = { class: "flex items-center gap-2" }, va = { class: "flex items-center gap-4 text-xs text-content-secondary" }, _a = { class: "bg-bg-secondary border-b border-border px-6 py-2" }, ba = { class: "flex items-center gap-2" }, ya = ["disabled"], Ea = { class: "flex-1 min-h-0" }, Na = {
   key: 0,
   class: "h-full p-6"
 }, xa = { class: "space-y-6" }, wa = { class: "card" }, Oa = { class: "flex gap-3" }, Da = ["disabled"], Sa = { class: "card" }, Ta = { class: "grid grid-cols-1 md:grid-cols-2 gap-4" }, Va = ["disabled"], Ca = { class: "text-2xl" }, Ma = { class: "text-left" }, Aa = { class: "font-medium text-content" }, Ia = {
@@ -4946,36 +4946,36 @@ const ia = { class: "flex justify-between border-b border-border/70 bg-bg-second
 }, La = { class: "text-xs text-content-secondary" }, ka = { class: "text-sm text-content-secondary whitespace-pre-wrap font-mono" }, Ua = /* @__PURE__ */ $s({
   __name: "MessagingTest",
   setup(e) {
-    const t = Ge("messaging"), n = Ge("connecting"), s = Ge("unavailable"), o = Ge(""), r = Ge([]), i = Ge(0), l = Ge(0), a = Ge(null), p = Ge(!1);
-    let d = null, f = null, g = 0;
+    const t = Ge("messaging"), n = Ge("connecting"), s = Ge("unavailable"), o = Ge(""), r = Ge([]), i = Ge(0), l = Ge(0), a = Ge(null), d = Ge(!1);
+    let p = null, f = null, g = 0;
     const x = async () => {
       try {
-        if (typeof window < "u" && window.pluginAPI) {
-          d = window.pluginAPI, s.value = "available";
+        if (typeof window < "u" && window.appAPI) {
+          p = window.appAPI, s.value = "available";
           let R = 0;
           const $ = 50;
-          for (; (!d.getPluginId() || d.getPluginId() === "") && R < $; )
+          for (; (!p.getAppId() || p.getAppId() === "") && R < $; )
             await new Promise((re) => setTimeout(re, 100)), R++;
-          const Y = d.getPluginId();
-          if (console.log(`[MessagingTest] Plugin ID initialized: '${Y}' (attempts: ${R})`), d.messaging) {
-            const re = d.messaging.onMessage((ye) => {
+          const Y = p.getAppId();
+          if (console.log(`[MessagingTest] App ID initialized: '${Y}' (attempts: ${R})`), p.messaging) {
+            const re = p.messaging.onMessage((ye) => {
               S(ye);
             }), _t = (ye, ae) => {
               console.log("[MessagingTest] Received channel message:", ye, "from:", ae), S(ye);
-            }, Ct = d.messaging.subscribeToChannel("test", _t);
+            }, Ct = p.messaging.subscribeToChannel("test", _t);
             f = () => {
               re && re(), Ct && Ct();
             }, n.value = "connected", await I({
               type: "connection-established",
               timestamp: (/* @__PURE__ */ new Date()).toISOString(),
               webviewId: "message-tester-webview"
-            }), console.log("[MessagingTest] Plugin API initialized and connected");
+            }), console.log("[MessagingTest] App API initialized and connected");
           } else
-            console.warn("[MessagingTest] Plugin API found but messaging not available"), n.value = "disconnected";
+            console.warn("[MessagingTest] App API found but messaging not available"), n.value = "disconnected";
         } else
-          console.warn("[MessagingTest] Plugin API not available"), s.value = "unavailable", n.value = "disconnected";
+          console.warn("[MessagingTest] App API not available"), s.value = "unavailable", n.value = "disconnected";
       } catch (R) {
-        console.error("[MessagingTest] Failed to initialize plugin API:", R), s.value = "unavailable", n.value = "disconnected";
+        console.error("[MessagingTest] Failed to initialize app API:", R), s.value = "unavailable", n.value = "disconnected";
       }
     }, S = (R) => {
       console.log("[MessagingTest] Received message from app instance:", R);
@@ -4990,12 +4990,12 @@ const ia = { class: "flex justify-between border-b border-border/70 bg-bg-second
         a.value && (a.value.scrollTop = a.value.scrollHeight);
       });
     }, I = async (R) => {
-      if (!d || !d.messaging) {
-        console.error("[MessagingTest] Plugin API not available for sending");
+      if (!p || !p.messaging) {
+        console.error("[MessagingTest] App API not available for sending");
         return;
       }
       try {
-        console.log("[MessagingTest] Sending message:", R), R.type === "ping" && (g = Date.now()), await d.messaging.sendToChannel("test", R), i.value++, r.value.push({
+        console.log("[MessagingTest] Sending message:", R), R.type === "ping" && (g = Date.now()), await p.messaging.sendToChannel("test", R), i.value++, r.value.push({
           type: R.type || "custom",
           direction: "sent",
           content: R,
@@ -5053,8 +5053,8 @@ const ia = { class: "flex justify-between border-b border-border/70 bg-bg-second
         timestamp: (/* @__PURE__ */ new Date()).toISOString()
       });
     }, Z = async () => {
-      if (p.value) return;
-      p.value = !0;
+      if (d.value) return;
+      d.value = !0;
       const R = Math.random().toString(36).substr(2, 9);
       try {
         for (let $ = 0; $ < 10; $++)
@@ -5066,20 +5066,20 @@ const ia = { class: "flex justify-between border-b border-border/70 bg-bg-second
             payload: `Stress test message ${$ + 1} with some data: ${Math.random()}`
           }), await new Promise((Y) => setTimeout(Y, 50));
       } finally {
-        p.value = !1;
+        d.value = !1;
       }
     }, me = () => {
       r.value = [], i.value = 0, l.value = 0;
     }, oe = (R) => {
       (R === "messaging" || R === "history") && (t.value = R);
     };
-    return dr(() => {
+    return pr(() => {
       console.log("[MessagingTest] Component mounted, initializing..."), x();
     }), Rs(() => {
       console.log("[MessagingTest] Component unmounting, cleaning up..."), f && f();
     }), (R, $) => (Ne(), Oe("div", fa, [
-      D("div", da, [
-        D("div", pa, [
+      D("div", pa, [
+        D("div", da, [
           D("div", ha, [
             D("div", ga, [
               $[1] || ($[1] = D("span", { class: "text-xs text-content-secondary" }, "Status:", -1)),
@@ -5127,8 +5127,8 @@ const ia = { class: "flex justify-between border-b border-border/70 bg-bg-second
           D("button", {
             onClick: Z,
             class: "px-3 py-1.5 text-xs font-medium rounded-md bg-orange-500/10 text-orange-500 hover:bg-orange-500/20 transition-colors disabled:opacity-50",
-            disabled: p.value
-          }, ue(p.value ? "⏳" : "⚡") + " Stress ", 9, ya),
+            disabled: d.value
+          }, ue(d.value ? "⏳" : "⚡") + " Stress ", 9, ya),
           $[3] || ($[3] = D("div", { class: "flex-1" }, null, -1)),
           D("button", {
             onClick: me,
@@ -5216,11 +5216,11 @@ const ia = { class: "flex justify-between border-b border-border/70 bg-bg-second
                 D("button", {
                   onClick: Z,
                   class: "flex items-center gap-3 p-4 bg-orange-500/5 border border-orange-500/20 rounded-lg hover:bg-orange-500/10 transition-colors",
-                  disabled: p.value
+                  disabled: d.value
                 }, [
-                  D("span", Ca, ue(p.value ? "⏳" : "⚡"), 1),
+                  D("span", Ca, ue(d.value ? "⏳" : "⚡"), 1),
                   D("div", Ma, [
-                    D("div", Aa, ue(p.value ? "Testing..." : "Stress Test"), 1),
+                    D("div", Aa, ue(d.value ? "Testing..." : "Stress Test"), 1),
                     $[9] || ($[9] = D("div", { class: "text-xs text-content-secondary" }, " Send 10 rapid messages for performance testing ", -1))
                   ])
                 ], 8, Va)
@@ -5239,7 +5239,7 @@ const ia = { class: "flex justify-between border-b border-border/70 bg-bg-second
               D("div", { class: "text-lg font-medium mb-2" }, "No messages yet", -1),
               D("div", { class: "text-sm" }, "Send a message to see the history here", -1)
             ]))) : (Ne(), Oe("div", Pa, [
-              (Ne(!0), Oe(De, null, pr(r.value, (Y, re) => (Ne(), Oe("div", {
+              (Ne(!0), Oe(De, null, dr(r.value, (Y, re) => (Ne(), Oe("div", {
                 key: re,
                 class: ot([
                   "p-4 rounded-lg border-l-4",
@@ -5272,11 +5272,11 @@ const ia = { class: "flex justify-between border-b border-border/70 bg-bg-second
   for (const [s, o] of t)
     n[s] = o;
   return n;
-}, Ka = /* @__PURE__ */ Ur(Ua, [["__scopeId", "data-v-a1804245"]]), Wa = { class: "min-h-screen bg-bg-primary text-content" }, Ba = { class: "h-[calc(100vh-80px)] overflow-hidden" }, qa = /* @__PURE__ */ $s({
+}, Ka = /* @__PURE__ */ Ur(Ua, [["__scopeId", "data-v-706f9fe3"]]), Wa = { class: "min-h-screen bg-bg-primary text-content" }, Ba = { class: "h-[calc(100vh-80px)] overflow-hidden" }, qa = /* @__PURE__ */ $s({
   __name: "App",
   setup(e) {
     return (t, n) => (Ne(), Oe("div", Wa, [
-      n[0] || (n[0] = dc('<header class="bg-bg-secondary border-b border-border p-4" data-v-149d1035><div class="flex items-center gap-3" data-v-149d1035><div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center" data-v-149d1035><span class="text-white font-bold text-sm" data-v-149d1035>📡</span></div><div data-v-149d1035><h1 class="text-lg font-semibold text-content" data-v-149d1035>Message Tester</h1><p class="text-xs text-content-secondary" data-v-149d1035>Bidirectional Communication Testing</p></div></div></header>', 1)),
+      n[0] || (n[0] = pc('<header class="bg-bg-secondary border-b border-border p-4" data-v-149d1035><div class="flex items-center gap-3" data-v-149d1035><div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center" data-v-149d1035><span class="text-white font-bold text-sm" data-v-149d1035>📡</span></div><div data-v-149d1035><h1 class="text-lg font-semibold text-content" data-v-149d1035>Message Tester</h1><p class="text-xs text-content-secondary" data-v-149d1035>Bidirectional Communication Testing</p></div></div></header>', 1)),
       D("main", Ba, [
         Se(Ka)
       ])
@@ -5397,7 +5397,7 @@ class Ja extends za {
       type: "pong",
       originalPing: n,
       timestamp: (/* @__PURE__ */ new Date()).toISOString(),
-      appId: this.api.getPluginId(),
+      appId: this.api.getAppId(),
       responseTime: Date.now()
     };
     await this.sendResponseMessage(s), await this.api.messaging.sendToChannel("test", s);
@@ -5411,7 +5411,7 @@ class Ja extends za {
       message: `Hello from app instance! Received: ${n.content}`,
       timestamp: (/* @__PURE__ */ new Date()).toISOString(),
       appInfo: {
-        id: this.api.getPluginId(),
+        id: this.api.getAppId(),
         version: "1.0.0",
         name: "Message Tester"
       }
@@ -5427,7 +5427,7 @@ class Ja extends za {
     s === "app-info" ? await this.sendResponseMessage({
       type: "app-info-response",
       data: {
-        appId: this.api.getPluginId(),
+        appId: this.api.getAppId(),
         windowId: ((o = this._testWindow) == null ? void 0 : o.id) || "unknown",
         timestamp: (/* @__PURE__ */ new Date()).toISOString(),
         uptime: process.uptime(),
@@ -5477,7 +5477,7 @@ class Ja extends za {
       type: "connection-acknowledged",
       message: "App instance is ready for messaging tests!",
       timestamp: (/* @__PURE__ */ new Date()).toISOString(),
-      appId: this.api.getPluginId(),
+      appId: this.api.getAppId(),
       capabilities: ["ping-pong", "data-requests", "custom-messages", "stress-testing"]
     });
   }
@@ -5511,18 +5511,18 @@ class Ja extends za {
    * Handle messages received on test channel
    */
   async handleTestChannelMessage(n, s) {
-    if (console.log("[MessageTesterApp] Handling test channel message:", n, "from:", s), n.type === "ping" && s !== this.api.getPluginId()) {
+    if (console.log("[MessageTesterApp] Handling test channel message:", n, "from:", s), n.type === "ping" && s !== this.api.getAppId()) {
       console.log("[MessageTesterApp] Received ping from external source, sending pong");
       const o = {
         type: "pong",
         originalPing: n,
         timestamp: (/* @__PURE__ */ new Date()).toISOString(),
-        appId: this.api.getPluginId(),
+        appId: this.api.getAppId(),
         responseTime: Date.now(),
         source: "app"
       };
       await this.api.messaging.sendToChannel("test", o), console.log("[MessageTesterApp] Sent pong response to test channel");
-    } else n.type === "ping" && s === this.api.getPluginId() && console.log("[MessageTesterApp] Ignoring ping from self to avoid loop");
+    } else n.type === "ping" && s === this.api.getAppId() && console.log("[MessageTesterApp] Ignoring ping from self to avoid loop");
   }
 }
 const Za = new Ja();
