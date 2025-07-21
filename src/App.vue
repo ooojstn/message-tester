@@ -1,6 +1,7 @@
 <template>
     <div class="min-h-screen bg-bg-primary text-content">
         <!-- Header -->
+        <!--
         <header class="bg-bg-secondary border-b border-border p-4">
             <div class="flex items-center gap-3">
                 <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
@@ -12,6 +13,7 @@
                 </div>
             </div>
         </header>
+        -->
 
         <!-- Main Content -->
         <main class="h-[calc(100vh-80px)] overflow-hidden">
