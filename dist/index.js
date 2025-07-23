@@ -4924,7 +4924,7 @@ const ra = { class: "flex justify-between border-b border-border/70 bg-bg-second
       ])
     ]));
   }
-}), ua = { class: "h-full flex flex-col" }, fa = { class: "bg-bg-secondary border-b border-border px-6 py-3" }, pa = { class: "flex items-center justify-between" }, da = { class: "flex items-center gap-6" }, ha = { class: "flex items-center gap-2" }, ga = { class: "flex items-center gap-2" }, ma = { class: "flex items-center gap-4 text-xs text-content-secondary" }, va = { class: "bg-bg-secondary border-b border-border px-6 py-2" }, _a = { class: "flex items-center gap-2" }, ba = ["disabled"], ya = { class: "flex-1 min-h-0" }, Ea = {
+}), ua = { class: "h-full flex flex-col" }, fa = { class: "bg-bg-secondary border-b border-border px-6 py-3" }, pa = { class: "flex items-center justify-between" }, da = { class: "flex items-center gap-6" }, ha = { class: "flex items-center gap-2" }, ga = { class: "flex items-center gap-2" }, ma = { class: "flex items-center gap-4 text-xs text-content-secondary" }, va = { class: "bg-bg-secondary border-b border-border px-6 py-2" }, _a = { class: "flex items-center gap-2" }, ba = ["disabled"], ya = { class: "flex-1 overflow-hidden" }, Ea = {
   key: 0,
   class: "h-full p-6"
 }, Na = { class: "space-y-6" }, xa = { class: "card" }, wa = { class: "flex gap-3" }, Oa = ["disabled"], Da = { class: "card" }, Sa = { class: "grid grid-cols-1 md:grid-cols-2 gap-4" }, Ta = ["disabled"], Va = { class: "text-2xl" }, Ca = { class: "text-left" }, Ma = { class: "font-medium text-content" }, Aa = {
@@ -5268,7 +5268,7 @@ const ra = { class: "flex justify-between border-b border-border/70 bg-bg-second
   for (const [s, o] of t)
     n[s] = o;
   return n;
-}, Ua = /* @__PURE__ */ Ur(ka, [["__scopeId", "data-v-706f9fe3"]]), Ka = { class: "min-h-screen bg-bg-primary text-content" }, Wa = { class: "h-[calc(100vh-80px)] overflow-hidden" }, Ba = /* @__PURE__ */ $s({
+}, Ua = /* @__PURE__ */ Ur(ka, [["__scopeId", "data-v-73e8e462"]]), Ka = { class: "h-full bg-bg-primary text-content flex flex-col" }, Wa = { class: "flex-1 flex flex-col" }, Ba = /* @__PURE__ */ $s({
   __name: "App",
   setup(e) {
     return (t, n) => (Ne(), Oe("div", Ka, [
@@ -5277,7 +5277,7 @@ const ra = { class: "flex justify-between border-b border-border/70 bg-bg-second
       ])
     ]));
   }
-}), qa = /* @__PURE__ */ Ur(Ba, [["__scopeId", "data-v-edb2b8b8"]]);
+}), qa = /* @__PURE__ */ Ur(Ba, [["__scopeId", "data-v-0c00cd9c"]]);
 class Ga {
   async activate(t) {
     this.api = t, await this.onActivate();

@@ -95,7 +95,7 @@
         />
 
         <!-- Tab Content -->
-        <div class="flex-1 min-h-0">
+        <div class="flex-1 overflow-hidden">
             <!-- Messaging Tab -->
             <div v-if="activeTab === 'messaging'" class="h-full p-6">
                 <div class="space-y-6">

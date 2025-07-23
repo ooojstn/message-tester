@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen bg-bg-primary text-content">
+    <div class="h-full bg-bg-primary text-content flex flex-col">
         <!-- Header -->
         <!--
         <header class="bg-bg-secondary border-b border-border p-4">
@@ -16,7 +16,7 @@
         -->
 
         <!-- Main Content -->
-        <main class="h-[calc(100vh-80px)] overflow-hidden">
+        <main class="flex-1 flex flex-col">
             <MessagingTest />
         </main>
     </div>
