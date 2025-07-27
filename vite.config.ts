@@ -27,7 +27,7 @@ export default defineConfig(({ command, mode }) => {
       build: {
         lib: {
           entry: fileURLToPath(new URL("./src/main.ts", import.meta.url)),
-          name: "{{APP_CLASS_NAME}}",
+          name: "MessageTesterApp",
           fileName: "index",
           formats: ["es"]
         },
@@ -44,6 +44,10 @@ export default defineConfig(({ command, mode }) => {
     // Static web build configuration
     return {
       base: './', // Use relative paths for file:// protocol
+      server: {
+        port: 5656,
+        host: 'localhost'
+      },
       plugins: [
         vue({
           template: {

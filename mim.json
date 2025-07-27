@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "description": "A simple demo app for testing the new messages interface.",
   "author": "Justin Garofolo",
-  "entryPoint": "dist/index.js",
   "permissions": [
     "ui.windows",
     "ui.notifications",
@@ -14,5 +13,13 @@
   "engines": {
     "mimir": ">=1.0.0"
   },
-  "icon": "https://f002.backblazeb2.com/file/mimir-public/icons/testing.png"
+  "icon": "https://f002.backblazeb2.com/file/mimir-public/icons/testing.png",
+  "prod": {
+    "entryPoint": "dist/index.js",
+    "webviewPath": "/web-dist/index.html"
+  },
+  "dev": {
+    "entryPoint": "http://localhost:5656/dist/index.js",
+    "webviewPath": "http://localhost:5656"
+  }
 }
