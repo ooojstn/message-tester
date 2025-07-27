@@ -5279,12 +5279,12 @@ const ra = { class: "flex justify-between border-b border-border/70 bg-bg-second
   }
 }), qa = /* @__PURE__ */ Ur(Ba, [["__scopeId", "data-v-0c00cd9c"]]);
 class Ga {
-  async activate(t) {
-    this.api = t, await this.onActivate();
+  async start(t) {
+    this.api = t, await this.onStart();
   }
-  async deactivate() {
+  async stop() {
     var t;
-    await ((t = this.onDeactivate) == null ? void 0 : t.call(this));
+    await ((t = this.onStop) == null ? void 0 : t.call(this));
   }
 }
 typeof window < "u" && typeof document < "u" && Qc(qa).mount("#app");
@@ -5294,8 +5294,8 @@ class za extends Ga {
     Kn(this, "_testWindow", null);
     Kn(this, "_messageCleanup", null);
   }
-  async onActivate() {
-    console.log("[MessageTesterApp] App activated"), this.setupMessaging(), await this.api.ui.notifications.show("Message Tester activated! 📡", {
+  async onStart() {
+    console.log("[MessageTesterApp] App started"), this.setupMessaging(), await this.api.ui.notifications.show("Message Tester started! 📡", {
       type: "success",
       duration: 3e3
     });
@@ -5331,8 +5331,8 @@ class za extends Ga {
       });
     }
   }
-  async onDeactivate() {
-    console.log("[MessageTesterApp] App deactivated"), this._messageCleanup && (this._messageCleanup(), this._messageCleanup = null), this._testWindow && (console.log(`[MessageTesterApp] Clearing window reference: ${this._testWindow.id}`), this._testWindow = null), console.log("[MessageTesterApp] Cleared window reference for reactivation");
+  async onStop() {
+    console.log("[MessageTesterApp] App stopped"), this._messageCleanup && (this._messageCleanup(), this._messageCleanup = null), this._testWindow && (console.log(`[MessageTesterApp] Clearing window reference: ${this._testWindow.id}`), this._testWindow = null), console.log("[MessageTesterApp] Cleared window reference for restart");
   }
   /**
    * Set up messaging system to handle communication with webview and test channel

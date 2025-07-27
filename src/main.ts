@@ -28,14 +28,14 @@ class MessageTesterApp extends BaseApp {
     private _testWindow: WindowInfo | null = null;
     private _messageCleanup: MessageCleanup | null = null;
 
-    protected async onActivate(): Promise<void> {
-        console.log("[MessageTesterApp] App activated");
+    protected async onStart(): Promise<void> {
+        console.log("[MessageTesterApp] App started");
 
         // Set up messaging system
         this.setupMessaging();
 
-        // Show activation notification
-        await this.api.ui.notifications.show("Message Tester activated! 📡", {
+        // Show startup notification
+        await this.api.ui.notifications.show("Message Tester started! 📡", {
             type: "success",
             duration: 3000,
         });
@@ -83,8 +83,8 @@ class MessageTesterApp extends BaseApp {
         }
     }
 
-    protected async onDeactivate(): Promise<void> {
-        console.log("[MessageTesterApp] App deactivated");
+    protected async onStop(): Promise<void> {
+        console.log("[MessageTesterApp] App stopped");
 
         // Clean up messaging
         if (this._messageCleanup) {
@@ -92,12 +92,12 @@ class MessageTesterApp extends BaseApp {
             this._messageCleanup = null;
         }
 
-        // Clear the window reference to allow reactivation
+        // Clear the window reference to allow restart
         if (this._testWindow) {
             console.log(`[MessageTesterApp] Clearing window reference: ${this._testWindow.id}`);
             this._testWindow = null;
         }
-        console.log("[MessageTesterApp] Cleared window reference for reactivation");
+        console.log("[MessageTesterApp] Cleared window reference for restart");
     }
 
     /**
